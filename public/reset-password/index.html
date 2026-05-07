@@ -62,9 +62,9 @@
       const userId = params.get("userId");
       const secret = params.get("secret");
 
-      const deepLink = `zgi://reset-password?userId=${encodeURIComponent(
-        userId || ""
-      )}&secret=${encodeURIComponent(secret || "")}`;
+const deepLink = `exp://192.168.1.207:8081/--/reset-password?userId=${encodeURIComponent(
+  userId || ""
+)}&secret=${encodeURIComponent(secret || "")}`;
 
       const openAppButton = document.getElementById("openApp");
       openAppButton.href = deepLink;
