@@ -6,32 +6,56 @@
     <title>ZGI</title>
 
     <style>
+      :root {
+        --background: #f8fafc;
+        --card: #ffffff;
+        --primary: #1f235a;
+        --text: #1f235a;
+        --body: #475569;
+        --muted: #94a3b8;
+        --button-text: #ffffff;
+        --shadow: rgba(15, 23, 42, 0.08);
+        --success: #16a34a;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
       body {
         margin: 0;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        background: #f8fafc;
-        color: #1f235a;
-        display: flex;
+        min-height: 100%;
+        background: var(--background);
+        color: var(--text);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui,
+          Roboto, Helvetica, Arial, sans-serif;
+      }
+
+      body {
         min-height: 100vh;
+        display: flex;
         align-items: center;
         justify-content: center;
         padding: 24px;
       }
 
-      .card {
+      main {
         width: 100%;
         max-width: 420px;
         border-radius: 28px;
-        background: white;
+        background: var(--card);
         padding: 32px;
         text-align: center;
-        box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+        box-shadow: 0 18px 45px var(--shadow);
       }
 
       .icon {
         width: 64px;
         height: 64px;
         border-radius: 999px;
+        background: rgba(22, 163, 74, 0.12);
+        color: var(--success);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -40,20 +64,18 @@
         font-weight: 700;
       }
 
-      .icon.success {
-        background: rgba(22, 163, 74, 0.12);
-        color: #16a34a;
-      }
-
       h1 {
         margin: 0;
         font-size: 26px;
         line-height: 1.2;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        color: var(--text);
       }
 
       p {
         margin: 14px 0 0;
-        color: #475569;
+        color: var(--body);
         font-size: 16px;
         line-height: 1.6;
       }
@@ -64,25 +86,31 @@
         align-items: center;
         justify-content: center;
         border-radius: 999px;
-        background: #1f235a;
-        color: white;
-        padding: 14px 20px;
+        background: var(--primary);
+        color: var(--button-text);
+        padding: 14px 22px;
         text-decoration: none;
         font-weight: 700;
         font-size: 15px;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .button:active {
+        transform: scale(0.99);
       }
 
       .hint {
         margin-top: 14px;
-        color: #94a3b8;
+        color: var(--muted);
         font-size: 13px;
+        line-height: 1.5;
       }
     </style>
   </head>
 
   <body>
-    <main class="card">
-      <div class="icon success">✓</div>
+    <main>
+      <div class="icon">✓</div>
 
       <h1 id="title">Pago confirmado</h1>
 
@@ -91,10 +119,10 @@
         al tour.
       </p>
 
-      <a id="openApp" class="button" href="zgi://">Volver a ZGI</a>
+      <a id="openApp" class="button" href="#">Volver a ZGI</a>
 
       <p id="hint" class="hint">
-        Si la app no se abre automáticamente, vuelve manualmente a ZGI.
+        Si la app no se abre automáticamente, toca el botón.
       </p>
     </main>
 
@@ -105,35 +133,35 @@
           description:
             "Tu compra fue procesada correctamente. Ya puedes volver a ZGI y acceder al tour.",
           button: "Volver a ZGI",
-          hint: "Si la app no se abre automáticamente, vuelve manualmente a ZGI.",
+          hint: "Si la app no se abre automáticamente, toca el botón.",
         },
         en: {
           title: "Payment confirmed",
           description:
             "Your purchase was processed successfully. You can now return to ZGI and access the tour.",
           button: "Back to ZGI",
-          hint: "If the app does not open automatically, return to ZGI manually.",
+          hint: "If the app does not open automatically, tap the button.",
         },
         it: {
           title: "Pagamento confermato",
           description:
             "Il tuo acquisto è stato elaborato correttamente. Ora puoi tornare su ZGI e accedere al tour.",
           button: "Torna a ZGI",
-          hint: "Se l'app non si apre automaticamente, torna manualmente su ZGI.",
+          hint: "Se l'app non si apre automaticamente, tocca il pulsante.",
         },
         pt: {
           title: "Pagamento confirmado",
           description:
             "Sua compra foi processada com sucesso. Agora você pode voltar ao ZGI e acessar o tour.",
           button: "Voltar ao ZGI",
-          hint: "Se o app não abrir automaticamente, volte manualmente ao ZGI.",
+          hint: "Se o app não abrir automaticamente, toque no botão.",
         },
         fr: {
           title: "Paiement confirmé",
           description:
             "Votre achat a été traité avec succès. Vous pouvez maintenant retourner sur ZGI et accéder au tour.",
           button: "Retourner à ZGI",
-          hint: "Si l’app ne s’ouvre pas automatiquement, retournez manuellement sur ZGI.",
+          hint: "Si l’app ne s’ouvre pas automatiquement, touchez le bouton.",
         },
       };
 
@@ -147,11 +175,13 @@
       document.getElementById("openApp").textContent = copy.button;
       document.getElementById("hint").textContent = copy.hint;
 
+      const deepLink = "exp://192.168.1.207:8081/--/";
+
       const openAppButton = document.getElementById("openApp");
-      openAppButton.href = "zgi://";
+      openAppButton.href = deepLink;
 
       setTimeout(() => {
-        window.location.href = "zgi://";
+        window.location.href = deepLink;
       }, 700);
     </script>
   </body>
