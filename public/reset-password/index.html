@@ -7,10 +7,14 @@
 
     <style>
       :root {
-        --background: #ffffff;
-        --text: #11181c;
-        --button: #1F235A;
+        --background: #f8fafc;
+        --card: #ffffff;
+        --primary: #1f235a;
+        --text: #1f235a;
+        --body: #475569;
+        --muted: #94a3b8;
         --button-text: #ffffff;
+        --shadow: rgba(15, 23, 42, 0.08);
       }
 
       * {
@@ -23,7 +27,7 @@
         min-height: 100%;
         background: var(--background);
         color: var(--text);
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui,
           Roboto, Helvetica, Arial, sans-serif;
       }
 
@@ -32,84 +36,134 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 32px;
+        padding: 24px;
       }
 
       main {
         width: 100%;
-        max-width: 320px;
+        max-width: 420px;
+        border-radius: 28px;
+        background: var(--card);
+        padding: 32px;
         text-align: center;
+        box-shadow: 0 18px 45px var(--shadow);
+      }
+
+      .logo-wrap {
+        width: 76px;
+        height: 76px;
+        border-radius: 999px;
+        background: rgba(31, 35, 90, 0.08);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 22px;
       }
 
       .logo {
-        width: 82px;
-        height: 82px;
+        width: 52px;
+        height: 52px;
         object-fit: contain;
         display: block;
-        margin: 0 auto 38px;
       }
 
       h1 {
         margin: 0;
-        font-size: 24px;
+        font-size: 26px;
         line-height: 1.2;
-        font-weight: 300;
+        font-weight: 700;
         letter-spacing: -0.02em;
         color: var(--text);
       }
 
-      .button {
-        display: block;
-        width: 100%;
-        margin-top: 36px;
-        padding: 16px 18px;
-        border-radius: 14px;
-        background: var(--button);
-        color: var(--button-text);
-        text-decoration: none;
+      p {
+        margin: 14px 0 0;
+        color: var(--body);
         font-size: 16px;
-        line-height: 1;
-        font-weight: 400;
-        text-align: center;
+        line-height: 1.6;
+      }
+
+      .button {
+        display: inline-flex;
+        margin-top: 24px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        background: var(--primary);
+        color: var(--button-text);
+        padding: 14px 22px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 15px;
         -webkit-tap-highlight-color: transparent;
       }
 
       .button:active {
         transform: scale(0.99);
       }
+
+      .hint {
+        margin-top: 14px;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.5;
+      }
     </style>
   </head>
 
   <body>
     <main>
-      <img class="logo" src="../assets/icon.png" alt="ZGI" />
+      <div class="logo-wrap">
+        <img class="logo" src="../assets/icon.png" alt="ZGI" />
+      </div>
 
       <h1 id="title">Restablecer contraseña</h1>
 
+      <p id="description">
+        Abre ZGI para continuar con el restablecimiento de tu contraseña.
+      </p>
+
       <a id="openApp" class="button" href="#">Abrir ZGI</a>
+
+      <p id="hint" class="hint">
+        Si la app no se abre automáticamente, toca el botón.
+      </p>
     </main>
 
     <script>
       const translations = {
         es: {
           title: "Restablecer contraseña",
+          description:
+            "Abre ZGI para continuar con el restablecimiento de tu contraseña.",
           button: "Abrir ZGI",
+          hint: "Si la app no se abre automáticamente, toca el botón.",
         },
         en: {
           title: "Reset password",
+          description: "Open ZGI to continue resetting your password.",
           button: "Open ZGI",
+          hint: "If the app does not open automatically, tap the button.",
         },
         it: {
           title: "Reimposta password",
+          description:
+            "Apri ZGI per continuare con il ripristino della password.",
           button: "Apri ZGI",
+          hint: "Se l'app non si apre automaticamente, tocca il pulsante.",
         },
         pt: {
           title: "Redefinir senha",
+          description: "Abra o ZGI para continuar redefinindo sua senha.",
           button: "Abrir ZGI",
+          hint: "Se o app não abrir automaticamente, toque no botão.",
         },
         fr: {
           title: "Réinitialiser le mot de passe",
+          description:
+            "Ouvrez ZGI pour continuer la réinitialisation de votre mot de passe.",
           button: "Ouvrir ZGI",
+          hint: "Si l’app ne s’ouvre pas automatiquement, touchez le bouton.",
         },
       };
 
@@ -119,7 +173,9 @@
       document.documentElement.lang = translations[lang] ? lang : "en";
 
       document.getElementById("title").textContent = copy.title;
+      document.getElementById("description").textContent = copy.description;
       document.getElementById("openApp").textContent = copy.button;
+      document.getElementById("hint").textContent = copy.hint;
 
       const params = new URLSearchParams(window.location.search);
 

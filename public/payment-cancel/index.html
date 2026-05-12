@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ZGI</title>
+
+    <style>
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: #f8fafc;
+        color: #1f235a;
+        display: flex;
+        min-height: 100vh;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+      }
+
+      .card {
+        width: 100%;
+        max-width: 420px;
+        border-radius: 28px;
+        background: white;
+        padding: 32px;
+        text-align: center;
+        box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+      }
+
+      .icon {
+        width: 64px;
+        height: 64px;
+        border-radius: 999px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        font-size: 30px;
+        font-weight: 700;
+      }
+
+      .icon.error {
+        background: rgba(220, 38, 38, 0.12);
+        color: #dc2626;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 26px;
+        line-height: 1.2;
+      }
+
+      p {
+        margin: 14px 0 0;
+        color: #475569;
+        font-size: 16px;
+        line-height: 1.6;
+      }
+
+      .button {
+        display: inline-flex;
+        margin-top: 24px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        background: #1f235a;
+        color: white;
+        padding: 14px 20px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 15px;
+      }
+
+      .hint {
+        margin-top: 14px;
+        color: #94a3b8;
+        font-size: 13px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main class="card">
+      <div class="icon error">×</div>
+
+      <h1 id="title">Pago cancelado</h1>
+
+      <p id="description">
+        No se realizó ningún cargo. Puedes volver a ZGI e intentarlo nuevamente.
+      </p>
+
+      <a id="openApp" class="button" href="zgi://">Volver a ZGI</a>
+
+      <p id="hint" class="hint">
+        Si la app no se abre automáticamente, vuelve manualmente a ZGI.
+      </p>
+    </main>
+
+    <script>
+      const translations = {
+        es: {
+          title: "Pago cancelado",
+          description:
+            "No se realizó ningún cargo. Puedes volver a ZGI e intentarlo nuevamente.",
+          button: "Volver a ZGI",
+          hint: "Si la app no se abre automáticamente, vuelve manualmente a ZGI.",
+        },
+        en: {
+          title: "Payment cancelled",
+          description:
+            "No charge was made. You can return to ZGI and try again.",
+          button: "Back to ZGI",
+          hint: "If the app does not open automatically, return to ZGI manually.",
+        },
+        it: {
+          title: "Pagamento annullato",
+          description:
+            "Non è stato effettuato alcun addebito. Puoi tornare su ZGI e riprovare.",
+          button: "Torna a ZGI",
+          hint: "Se l'app non si apre automaticamente, torna manualmente su ZGI.",
+        },
+        pt: {
+          title: "Pagamento cancelado",
+          description:
+            "Nenhuma cobrança foi realizada. Você pode voltar ao ZGI e tentar novamente.",
+          button: "Voltar ao ZGI",
+          hint: "Se o app não abrir automaticamente, volte manualmente ao ZGI.",
+        },
+        fr: {
+          title: "Paiement annulé",
+          description:
+            "Aucun paiement n’a été effectué. Vous pouvez retourner sur ZGI et réessayer.",
+          button: "Retourner à ZGI",
+          hint: "Si l’app ne s’ouvre pas automatiquement, retournez manuellement sur ZGI.",
+        },
+      };
+
+      const lang = navigator.language.slice(0, 2).toLowerCase();
+      const copy = translations[lang] || translations.en;
+
+      document.documentElement.lang = translations[lang] ? lang : "en";
+
+      document.getElementById("title").textContent = copy.title;
+      document.getElementById("description").textContent = copy.description;
+      document.getElementById("openApp").textContent = copy.button;
+      document.getElementById("hint").textContent = copy.hint;
+
+      const openAppButton = document.getElementById("openApp");
+      openAppButton.href = "zgi://";
+
+      setTimeout(() => {
+        window.location.href = "zgi://";
+      }, 700);
+    </script>
+  </body>
+</html>
